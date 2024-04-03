@@ -20,7 +20,7 @@ class RecipesCollectionViewCell: UICollectionViewCell {
     let mainContainer: UIView = {
        let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(named: "lightGreen")?.withAlphaComponent(0.5)
+        view.backgroundColor = UIColor(named: "lightGreen")?.withAlphaComponent(0.3)
         view.layer.cornerRadius = 10
         return view
     }()

@@ -32,12 +32,6 @@ class MainViewController: UIViewController {
         btn.backgroundColor = .oliveGreen
         btn.layer.cornerRadius = 8
         btn.tintColor = .white
-        
-        let icon = UIImage(named: "ic-next")!
-        
-        btn.setImage(icon, for: .normal)
-        btn.imageView?.contentMode = .scaleAspectFit
-        
         return btn
     }()
     
