@@ -7,35 +7,73 @@
 
 import XCTest
 
-final class YourRecipesUITests: XCTestCase {
+class YourRecipesUITests: XCTestCase {
+
+    var app: XCUIApplication!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        app = XCUIApplication()
+        app.launch()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        app = nil
     }
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
+    func testIntroPageAndNavigation() throws {
+        
+                // Check if intro page is displayed
+        let introPage = app.otherElements["introPage"]
+        XCTAssertTrue(introPage.waitForExistence(timeout: 5), "Intro page should be visible")
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        // Tap the start button
+        let startButton = app.buttons["Let's Begin"]
+        XCTAssertTrue(startButton.exists, "Start button should exist")
+        startButton.tap()
+
+        // Verify navigation to the main page
+        let searchTextField = app.textFields["Enter your search phrases here"]
+        XCTAssertTrue(searchTextField.exists, "Search text field should exist")
+    }
+
+    func testSearchRecipe() throws {
+        
+        // Check if intro page is displayed
+        let introPage = app.otherElements["introPage"]
+        XCTAssertTrue(introPage.waitForExistence(timeout: 5), "Intro page should be visible")
+
+        // Tap the start button
+        let startButton = app.buttons["Let's Begin"]
+        XCTAssertTrue(startButton.exists, "Start button should exist")
+        startButton.tap()
+
+        // Verify navigation to the main page
+        let searchTextField = app.textFields["Enter your search phrases here"]
+        XCTAssertTrue(searchTextField.exists, "Search text field should exist")
+
+        // Enter the search query
+        searchTextField.tap()
+        searchTextField.typeText("chicken") 
+
+        // Tap the search button
+        let searchButton = app.buttons["Search"]
+        XCTAssertTrue(searchButton.exists, "Search button should exist")
+        searchButton.tap()
+
+        // Verify that the collection view is visible and contains cells
+        let collectionView = app.collectionViews.firstMatch
+        XCTAssertTrue(collectionView.waitForExistence(timeout: 5), "Collection view should be visible")
+        XCTAssertTrue(collectionView.cells.count > 0, "Collection view should contain cells")
     }
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
             measure(metrics: [XCTApplicationLaunchMetric()]) {
                 XCUIApplication().launch()
             }
         }
     }
 }
+
+
