@@ -7,7 +7,7 @@ target 'YourRecipes' do
 
   # Pods for YourRecipes
   
-  pod 'Alamofire'
+  pod 'Alamofire' 
   pod 'lottie-ios'
   pod 'Toast-Swift', '~> 5.1.0'
 

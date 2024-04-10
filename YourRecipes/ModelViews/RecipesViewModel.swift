@@ -24,7 +24,7 @@ class RecipesViewModel {
 
         let url = APIList.search + params
 
-        APIManager.shared.serverRequest(from: url, model: SearchResult.self) { result in
+        APIManager.shared.serverRequest(from: url, method: .get, model: SearchResult.self) { result in
             switch result {
             case .success(let data):
                 self.isLoading = false

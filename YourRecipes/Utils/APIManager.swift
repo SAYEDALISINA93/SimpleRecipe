@@ -14,8 +14,8 @@ class APIManager {
     
     private init() {}
     
-    func serverRequest<T: Decodable>(from url: String, model: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
-        AF.request(url)
+    func serverRequest<T: Decodable>(from url: String, method: HTTPMethod, model: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
+        AF.request(url, method: method)
             .validate()
             .responseDecodable(of: T.self) { response in
                 switch response.result {
